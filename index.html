@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="icon" href="P8.jpg">
+    <title>Prissytats.com</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: poppins;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(0, 0, 0, 0.85);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo {
+            text-align: center;
+            color: #fff;
+            font-size: 42px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Navigation Styles */
+        nav {
+            background-color: rgba(20, 20, 20, 0.95);
+            padding: 15px 0;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            padding: 5px 10px;
+        }
+
+        .nav-links a:hover {
+            color: #ff6600;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #ff6600;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hamburger Menu Styles */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 101;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Mobile Navigation Styles */
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: rgba(20, 20, 20, 0.98);
+            z-index: 99;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .mobile-nav.active {
+            display: block;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 20px 0;
+        }
+
+        .mobile-nav-links li {
+            text-align: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .mobile-nav-links li:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: block;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+
+        .mobile-nav-links a:hover {
+            color: #ff6600;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                url('P1.jpg') 
+                no-repeat center center;
+            background-size: cover;
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 40px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content h1 {
+            font-size: 52px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: #ddd;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #ff6600;
+            color: #fff;
+            padding: 14px 35px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 30px;
+            transition: all 0.3s;
+            border: 2px solid #ff6600;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: #ff6600;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.4);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background-color: #111;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            color: #fff;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: #ff6600;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            color: #aaa;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 18px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: #1a1a1a;
+            padding: 40px 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #333;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(255, 102, 0, 0.2);
+            border-color: #ff6600;
+        }
+
+        .service-icon {
+            font-size: 50px;
+            margin-bottom: 25px;
+            color: #ff6600;
+        }
+
+        .service-card h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .service-card p {
+            color: #bbb;
+            line-height: 1.8;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 100px 0;
+            background-color: #0a0a0a;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            height: 280px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* Purchase Section */
+        .purchase {
+            padding: 100px 0;
+            background-color: #111;
+            text-align: center;
+        }
+
+        .purchase-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .purchase-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .purchase-content p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            color: #aaa;
+        }
+
+        .purchase-options {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .purchase-option {
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 10px;
+            width: 250px;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+
+        .purchase-option:hover {
+            border-color: #ff6600;
+            transform: translateY(-5px);
+        }
+
+        .purchase-option h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .purchase-option .price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff6600;
+            margin-bottom: 20px;
+        }
+
+        .purchase-option ul {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .purchase-option li {
+            margin-bottom: 10px;
+            color: #bbb;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #000;
+            color: #fff;
+            padding: 70px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 22px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff;
+            position: relative;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: #ff6600;
+            bottom: -8px;
+            left: 0;
+        }
+
+        .footer-column p, .footer-column a {
+            color: #aaa;
+            margin-bottom: 12px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: #ff6600;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            text-align: center;
+            transition: background-color 0.3s;
+            color: #ff6600;
+        }
+
+        .social-links a:hover {
+            background-color: #ff6600;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-container {
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .hero-content p {
+                font-size: 18px;
+            }
+            
+            .services-grid, .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .purchase-options {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo" id="home">PRISSY</div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container nav-container">
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#gall">Gallery</a></li>
+                <li><a href="#pur">Purchase</a></li>
+                <li><a href="#cont">Contact</a></li>
+            </ul>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <div class="mobile-nav" id="mobileNav">
+            <ul class="mobile-nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#gall">Gallery</a></li>
+                <li><a href="#pur">Purchase</a></li>
+                <li><a href="#cont">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Tattoo Store</h1>
+            <p>Experience the art of ink through our realistic, waterproof and long-lasting stickers.</p>
+            <a href="#pur" class="btn">Try it on</a>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>We offer a wide range of tattoo stickers and services to bring your vision to life.</p>
+            </div>
+            <div class="services-grid">
+                
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-palette"></i></div>
+                    <h3>ARTISTIC</h3>
+                    <p>Art on your skin, without the pain. High-quality, elegant and subtle designs that make self-expression easy, fun, and risk-free.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-eye"></i></div>
+                     <h3>REALISTIC</h3>
+                    <p>Ultra-realistic sticker tattoos created with sharp detailing and deep contrast. Perfect for everyday accessories, parties, or trying out a new look.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-pencil-alt"></i></div>
+                    <h3>CREATIVE DESIGNS</h3>
+                    <p>Whether you want to experiment with new designs, boost your style, or try a tattoo before getting the permanent version, we've got you covered.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery">
+        <div class="container" id="gall">
+            <div class="section-title">
+                <h2>Gallery</h2>
+                <p>Browse through our portfolio of recent tattoo products and artistic stickers</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="N1.jpg" alt="Tattoo Art">
+                </div>
+                <div class="gallery-item">
+                    <img src="N3.jpg" alt="Tattoo Art">
+                </div>
+                <div class="gallery-item">
+                    <img src="P3.jpg" alt="Tattoo Art">
+                </div>
+                <div class="gallery-item">
+                    <img src="N2.jpg" alt="Tattoo Art">
+                </div>
+                <div class="gallery-item">
+                    <img src="P4.jpg" alt="Tattoo Art">
+                </div>
+                <div class="gallery-item">
+                    <img src="N4.jpg" alt="Tattoo Art">
+                </div>
+                <div class="gallery-item">
+                    <img src="N5.jpg" alt="Tattoo Art">
+                </div>
+                <div class="gallery-item">
+                    <img src="P6.jpg" alt="Tattoo Art">
+                </div>
+                <div class="gallery-item">
+                    <img src="N6.jpg" alt="Tattoo Art">
+                </div>
+                <div class="gallery-item">
+                    <img src="P8.jpg" alt="Tattoo Art">
+                </div>
+                <div class="gallery-item">
+                    <img src="N7.jpg" alt="Tattoo Art">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="purchase" id="pur">
+    <div class="container">
+        <div class="purchase-content">
+            <div class="section-title">
+                <h2>Purchase</h2>
+                <p>Browse hundreds of designs (Basic, Standard and Premium) tattoo stickers. Visit our catalog to view.</p>
+            </div>
+            <div class="purchase-options">
+                <div class="purchase-option">
+                    <h3>Basic</h3>
+                    <div class="price">&#8358;1000</div>
+                    <ul>
+                        <li>Small tattoo design</li>
+                        <li>Up to 3 days</li>
+                        <li>Placement Consultation included</li>
+                    </ul>
+                    <a href="https://wa.me/+2349127336169" class="btn" target="_blank">View Catalog</a>
+                </div>
+                <div class="purchase-option">
+                    <h3>Standard</h3>
+                    <div class="price">&#8358;2000</div>
+                    <ul>
+                        <li>Medium tattoo design</li>
+                        <li>Up to 4 days</li>
+                        <li>Placement Consultation included</li>
+                    </ul>
+                    <a href="https://wa.me/+2349127336169" class="btn" target="_blank">View Catalog</a>
+                </div>
+                <div class="purchase-option">
+                    <h3>Premium</h3>
+                    <div class="price">&#8358;5000</div>
+                    <ul>
+                        <li>Large custom design</li>
+                        <li>Up to 4 days</li>
+                        <li>Priority booking</li>
+                    </ul>
+                    <a href="https://wa.me/+2349127336169" class="btn" target="_blank">View Catalog</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Prissy</h3>
+                    <p>Creating unique tattoo experiences since 2024. Our store is dedicated to providing exceptionally clean, professional and long lasting tattoo stickers.</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/+2349127336169"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.instagram.com/beaut.ylovexx?igsh=MWI5ZHQzaHUyb25vOQ%3D%3D&amp;utm_source=qr"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@prissy_5168?_r=1&amp;_d=ek0dg286eja6hc&amp;sec_uid=MS4wLjABAAAAC3mA19WdtzxFoo7UW3vGz7Hitu8viOh_o86iN7BF2xzX1-92rjXtoMgxEo3KmRbl&amp;share_author_id=7351881181011379205&amp;sharer_language=en&amp;source=h5_m&amp;u_code=edb00dkim6mg6a&amp;ug_btm=b8727,b0&amp;social_share_type=4&amp;utm_source=copy&amp;sec_user_id=MS4wLjABAAAAC3mA19WdtzxFoo7UW3vGz7Hitu8viOh_o86iN7BF2xzX1-92rjXtoMgxEo3KmRbl&amp;tt_from=copy&amp;utm_medium=ios&amp;utm_campaign=client_share&amp;enable_checksum=1&amp;user_id=7351881181011379205&amp;share_link_id=FE1FFF29-5730-4E03-9E06-78AA4A683727&amp;share_app_id=1233"><i class="fab fa-tiktok"></i></a>
+                        <!-- <a href="#"><i class="fab fa-youtube"></i></a> -->
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <a href="#home">Home</a>
+                    <a href="#gall">Gallery</a>
+                    <a href="#pur">Purchase</a>
+                    <a href="#cont">Contact</a>
+                </div>
+                <div class="footer-column" id="cont">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> New Hostel, Koladaisi University, Oyo State.</p>
+                    <p><i class="fas fa-phone"></i> +234 (912) 733-6169</p>
+                    <p><i class="fas fa-envelope"></i> info@prissytats.com</p>
+                    <p><i class="fas fa-clock"></i> Mon-Sat: 9am-8pm, Sun: 12pm-6pm</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Prissy Tats. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        hamburger.addEventListener('click', function(e) {
+            e.stopPropagation(); 
+            mobileNav.classList.toggle('active');
+
+            const spans = hamburger.querySelectorAll('span');
+            if (mobileNav.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+        
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = mobileNav.contains(event.target) || hamburger.contains(event.target);
+            
+            if (!isClickInsideNav && mobileNav.classList.contains('active')) {
+                mobileNav.classList.remove('active');
+                
+                const spans = hamburger.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+        
+        const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileNav.classList.remove('active');
+                
+                const spans = hamburger.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
