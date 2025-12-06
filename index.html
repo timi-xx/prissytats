@@ -100,7 +100,6 @@
             width: 100%;
         }
 
-        /* Hamburger Menu Styles */
         .hamburger {
             display: none;
             flex-direction: column;
@@ -117,7 +116,6 @@
             transition: 0.3s;
         }
 
-        /* Mobile Navigation Styles */
         .mobile-nav {
             display: none;
             position: absolute;
@@ -163,7 +161,7 @@
             color: #ff6600;
         }
 
-        /* Hero Section */
+        /* Hero Section with Animation */
         .hero {
             height: 80vh;
             display: flex;
@@ -195,8 +193,30 @@
             background-color: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            /* Animation properties */
+            opacity: 0;
+            transform: translateY(-100px);
+            animation: dropDown 1s ease-out forwards;
+            animation-delay: 0.3s;
         }
 
+        /* Drop down animation */
+        @keyframes dropDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-100px) scale(0.9);
+            }
+            70% {
+                opacity: 1;
+                transform: translateY(10px) scale(1.02);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Staggered animation for hero content children */
         .hero-content h1 {
             font-size: 52px;
             margin-bottom: 20px;
@@ -204,12 +224,34 @@
             letter-spacing: 3px;
             color: #fff;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.8s;
         }
 
         .hero-content p {
             font-size: 20px;
             margin-bottom: 30px;
             color: #ddd;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 1s;
+        }
+
+        .hero-content .btn {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 1.2s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .btn {
@@ -233,7 +275,6 @@
             box-shadow: 0 5px 15px rgba(255, 102, 0, 0.4);
         }
 
-        /* Services Section */
         .services {
             padding: 100px 0;
             background-color: #111;
@@ -310,7 +351,6 @@
             line-height: 1.8;
         }
 
-        /* Gallery Section */
         .gallery {
             padding: 100px 0;
             background-color: #0a0a0a;
@@ -357,7 +397,6 @@
             opacity: 1;
         }
 
-        /* Purchase Section */
         .purchase {
             padding: 100px 0;
             background-color: #111;
@@ -425,7 +464,6 @@
             color: #bbb;
         }
 
-        /* Footer */
         footer {
             background-color: #000;
             color: #fff;
@@ -502,7 +540,6 @@
             font-size: 14px;
         }
 
-        /* Responsive Styles */
         @media (max-width: 768px) {
             .nav-container {
                 justify-content: space-between;
